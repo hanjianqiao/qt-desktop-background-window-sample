@@ -20,7 +20,7 @@ MainBody::MainBody(QWidget *parent)
     h::DesktopBackgroundWindowManager::initialize();
     auto dbwm = h::DesktopBackgroundWindowManager::singleton();
 
-    // 支持多屏幕，给每个屏幕设置壁纸
+    // 支持多屏幕，给每个屏幕设置壁纸，当然，你也可以修改，给每个屏幕设置不一样的壁纸
     auto screens = dbwm->screens();
     for(const auto &screen : screens){
         /*
@@ -34,23 +34,14 @@ MainBody::MainBody(QWidget *parent)
         QLabel *label = new QLabel(nullptr);
         label->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
-
         // 第二步，将其设置为背景widget
         dbwm->setScreenBackgroundWidget(screen, label);
 
         // 第三步，初始化你的背景widget
-
-        if(false){
-            // 例子一：设置静态图片
-            label->setPixmap(QPixmap(":/images/robot.jpg").scaled(label->size(), Qt::IgnoreAspectRatio));
-        }else{
-            // 例子二：设置动态图片
-            QMovie *movie = new QMovie(":/images/rainbowCat.gif");
-            movie->setScaledSize(label->size());
-            label->setMovie(movie);
-            movie->start();
-        }
-
+        QMovie *movie = new QMovie(":/images/rainbowCat.gif");
+        movie->setScaledSize(label->size());
+        label->setMovie(movie);
+        movie->start();
     }
 }
 

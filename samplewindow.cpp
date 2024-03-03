@@ -13,6 +13,8 @@ MainBody::MainBody(QWidget *parent)
     QPushButton *exitButton = new QPushButton("退出请按我，强制退出有BUG！", this);
     rootLayout->addWidget(exitButton);
     QObject::connect(exitButton, &QPushButton::clicked, this, [](){
+        // 退出需要还原壁纸
+        h::DesktopBackgroundWindowManager::singleton()->prepareExit();
         qApp->exit(0);
     });
 
